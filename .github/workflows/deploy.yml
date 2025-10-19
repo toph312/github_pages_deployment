@@ -2,14 +2,22 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
     paths:
-      - 'index.html'
+      - 'index.html'    # 只有 index.html 变化才触发
+
+# 必须的权限：读内容、写 pages、OIDC 用于部署
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout repository
@@ -21,7 +29,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: .        # 把根目录下的所有静态文件上传（index.html 必须在根）
 
       - name: Deploy to GitHub Pages
         id: deployment
