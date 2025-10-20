@@ -2,6 +2,8 @@
 
 This project demonstrates how to automatically deploy a static website to **GitHub Pages** using **GitHub Actions**.
 
+https://roadmap.sh/projects/github-actions-deployment-workflow
+
 ## Project Structure
 
 ```
